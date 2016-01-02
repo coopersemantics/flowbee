@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>flowbee.during</title>
+	</head>
+
+	<body>
+		<script src="../dist/flowbee.js"></script>
+		<script>
+			flowbee.during(function(predicate) {
+				setTimeout(function() {
+					predicate(function(value) {
+						return value < 100;
+					});
+				}, 1000);
+			}, function(fn) {
+				setTimeout(function() {
+					fn(function(value) {
+						return value + 1;
+					});
+				}, 1);
+			}).done(function(err, fn) {
+				if (err) {
+					return err;
+				}
+
+				console.log(err, fn(0)); // null 100
+			});
+		</script>
+	</body>
+</html>

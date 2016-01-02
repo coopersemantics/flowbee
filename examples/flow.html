@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>flowbee.flow</title>
+	</head>
+
+	<body>
+		<script src="../dist/flowbee.js"></script>
+		<script>
+			flowbee.flow(function(next) {
+				setTimeout(function() {
+					next('a');
+				}, 1000);
+			}, function(next, value) {
+				setTimeout(function() {
+					next(value + 'b');
+				}, 500);
+			}, function(next, value) {
+				setTimeout(function() {
+					next(value + 'c');
+				}, 1);
+			}).done(function(err, value) {
+				console.log(err, value); // null "abc"
+			});
+		</script>
+	</body>
+</html>

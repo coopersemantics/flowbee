@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>flowbee.compose</title>
+	</head>
+
+	<body>
+		<script src="../dist/flowbee.js"></script>
+		<script>
+			flowbee.compose(function(next) {
+				setTimeout(function() {
+					next(function(value) {
+						return value + 'a';
+					});
+				}, 1000);
+			}, function(next) {
+				setTimeout(function() {
+					next(function(value) {
+						return value + 'b';
+					});
+				}, 500);
+			}, function(next) {
+				setTimeout(function() {
+					next(function() {
+						return 'c';
+					});
+				}, 1);
+			}).done(function(err, value) {
+				console.log(err, value); // null "cba"
+			});
+		</script>
+	</body>
+</html>
