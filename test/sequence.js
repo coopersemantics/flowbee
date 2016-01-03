@@ -3,26 +3,26 @@ import sequence from '../lib/sequence.js';
 describe('sequence', () => {
   it('should consume the return value of the previous `next` function', (done) => {
     let sequence1 = sequence(
-      (cb) => {
+      (next) => {
         setTimeout(() => {
-          cb(() => 'a');
+          next(() => 'a');
         }, 1000);
       },
-      (cb) => {
+      (next) => {
         setTimeout(() => {
-          cb((val) => val + 'b');
+          next((value) => value + 'b');
         }, 500);
       },
-      (cb) => {
+      (next) => {
         setTimeout(() => {
-          cb((val) => val + 'c');
+          next((value) => value + 'c');
         }, 1);
       }
     );
 
-    sequence1.done((err, values) => {
+    sequence1.done((err, value) => {
       expect(err).to.be.null;
-      expect(values).to.equal('abc');
+      expect(value).to.equal('abc');
       done();
     });
   });

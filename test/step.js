@@ -3,25 +3,25 @@ import step from '../lib/step.js';
 describe('step', () => {
   it('should create new instances', function() {
     let step1 = step(
-      (cb) => {
-        cb(1);
+      (next) => {
+        next(1);
       },
-      (cb) => {
-        cb(2);
+      (next) => {
+        next(2);
       },
-      (cb) => {
-        cb(3);
+      (next) => {
+        next(3);
       }
     );
     let step2 = step(
-      (cb) => {
-        cb(1);
+      (next) => {
+        next(1);
       },
-      (cb) => {
-        cb(2);
+      (next) => {
+        next(2);
       },
-      (cb) => {
-        cb(3);
+      (next) => {
+        next(3);
       }
     );
 
@@ -32,25 +32,25 @@ describe('step', () => {
   describe('next', () => {
     it('should execute the `next` function, with a synchronous iterator', (done) => {
       let step1 = step(
-        (cb) => {
-          cb(1);
+        (next) => {
+          next(1);
         },
-        (cb) => {
-          cb(2);
+        (next) => {
+          next(2);
         },
-        (cb) => {
-          cb(3);
+        (next) => {
+          next(3);
         }
       );
       let step2 = step(
-        (cb) => {
-          cb(1);
+        (next) => {
+          next(1);
         },
-        (cb) => {
-          cb(2);
+        (next) => {
+          next(2);
         },
-        (cb) => {
-          cb(3);
+        (next) => {
+          next(3);
         }
       );
 
@@ -70,36 +70,36 @@ describe('step', () => {
 
     it('should execute the `next` function, with an asynchronous iterator', (done) => {
       let step1 = step(
-        (cb) => {
+        (next) => {
           setTimeout(() => {
-            cb(1);
+            next(1);
           }, 1000);
         },
-        (cb) => {
+        (next) => {
           setTimeout(() => {
-            cb(2);
+            next(2);
           }, 500);
         },
-        (cb) => {
+        (next) => {
           setTimeout(() => {
-            cb(3);
+            next(3);
           }, 1);
         }
       );
       let step2 = step(
-        (cb) => {
+        (next) => {
           setTimeout(() => {
-            cb(1);
+            next(1);
           }, 100);
         },
-        (cb) => {
+        (next) => {
           setTimeout(() => {
-            cb(2);
+            next(2);
           }, 10);
         },
-        (cb) => {
+        (next) => {
           setTimeout(() => {
-            cb(3);
+            next(3);
           }, 1);
         }
       );
@@ -120,38 +120,38 @@ describe('step', () => {
 
     it('should stop subsequent execution, if a synchronous error is caught', (done) => {
       let step1 = step(
-        (cb) => {
-          foo();
+        (next) => {
           setTimeout(() => {
-            cb(1);
+            next(1);
           }, 1000);
         },
-        (cb) => {
+        (next) => {
+          foo();
           setTimeout(() => {
-            cb(2);
+            next(2);
           }, 500);
         },
-        (cb) => {
+        (next) => {
           setTimeout(() => {
-            cb(3);
+            next(3);
           }, 1);
         }
       );
       let step2 = step(
-        (cb) => {
+        (next) => {
           foo();
           setTimeout(() => {
-            cb(1);
+            next(1);
           }, 100);
         },
-        (cb) => {
+        (next) => {
           setTimeout(() => {
-            cb(2);
+            next(2);
           }, 10);
         },
-        (cb) => {
+        (next) => {
           setTimeout(() => {
-            cb(3);
+            next(3);
           }, 1);
         }
       );

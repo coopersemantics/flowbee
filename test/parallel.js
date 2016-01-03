@@ -1,21 +1,21 @@
 import parallel from '../lib/parallel.js';
 
 describe('parallel', () => {
-  it('should execute `fns` in parallel, keeping the order at which each is defined', (done) => {
+  it('should execute `fns` in parallel, keeping the order in which each is defined', (done) => {
     let parallel1 = parallel(
-      (cb) => {
+      (fn) => {
         setTimeout(() => {
-          cb(1);
+          fn(1);
         }, 1000);
       },
-      (cb) => {
+      (fn) => {
         setTimeout(() => {
-          cb(2);
+          fn(2);
         }, 500);
       },
-      (cb) => {
+      (fn) => {
         setTimeout(() => {
-          cb(3);
+          fn(3);
         }, 1);
       }
     );

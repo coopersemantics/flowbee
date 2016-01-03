@@ -3,26 +3,26 @@ import compose from '../lib/compose.js';
 describe('compose', () => {
   it('should consume the return value of the `next` function that follows', (done) => {
     let compose1 = compose(
-      (cb) => {
+      (next) => {
         setTimeout(() => {
-          cb((val) => val + 'a');
+          next((value) => value + 'a');
         }, 1000);
       },
-      (cb) => {
+      (next) => {
         setTimeout(() => {
-          cb((val) => val + 'b');
+          next((value) => value + 'b');
         }, 500);
       },
-      (cb) => {
+      (next) => {
         setTimeout(() => {
-          cb(() => 'c');
+          next(() => 'c');
         }, 1);
       }
     );
 
-    compose1.done((err, values) => {
+    compose1.done((err, value) => {
       expect(err).to.be.null;
-      expect(values).to.equal('cba');
+      expect(value).to.equal('cba');
       done();
     });
   });

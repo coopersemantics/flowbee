@@ -1,16 +1,16 @@
 import during from '../lib/during.js';
 
 describe('during', () => {
-  it('should invoke `fn` until `predicate` returns `false`', (done) => {
+  it('should execute `fn` until `predicate` returns `false`', (done) => {
     let during1 = during(
-      (cb) => {
+      (predicate) => {
         setTimeout(() => {
-          cb((val) => val < 100);
+          predicate((value) => value < 100);
         }, 1000);
       },
-      (cb, val) => {
+      (fn) => {
         setTimeout(() => {
-          cb((val) => val + 1);
+          fn((value) => value + 1);
         }, 1);
       }
     );

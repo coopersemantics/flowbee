@@ -3,26 +3,26 @@ import flow from '../lib/flow.js';
 describe('flow', () => {
   it('should consume the value of the previous `next` function', (done) => {
     let flow1 = flow(
-      (cb) => {
+      (next) => {
         setTimeout(() => {
-          cb('a');
+          next('a');
         }, 1000);
       },
-      (cb, val) => {
+      (next, value) => {
         setTimeout(() => {
-          cb(val + 'b');
+          next(value + 'b');
         }, 500);
       },
-      (cb, val) => {
+      (next, value) => {
         setTimeout(() => {
-          cb(val + 'c');
+          next(value + 'c');
         }, 1);
       }
     );
 
-    flow1.done((err, values) => {
+    flow1.done((err, value) => {
       expect(err).to.be.null;
-      expect(values).to.equal('abc');
+      expect(value).to.equal('abc');
       done();
     });
   });

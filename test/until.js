@@ -1,16 +1,16 @@
 import until from '../lib/until.js';
 
 describe('until', () => {
-  it('should invoke `fn` until `predicate` returns `true`', (done) => {
+  it('should execute `fn` until `predicate` returns `true`', (done) => {
     let until1 = until(
-      (cb) => {
+      (predicate) => {
         setTimeout(() => {
-          cb((val) => val > 100);
+          predicate((value) => value > 100);
         }, 1000);
       },
-      (cb, val) => {
+      (fn) => {
         setTimeout(() => {
-          cb((val) => val + 1);
+          fn((value) => value + 1);
         }, 1);
       }
     );

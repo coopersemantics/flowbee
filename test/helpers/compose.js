@@ -3,13 +3,13 @@ import compose from '../../lib/helpers/compose.js';
 describe('compose', () => {
   it('should consume the return value of the function that follows', () => {
     let compose1 = compose(
-      (val) => val + 'a',
-      (val) => val + 'b',
+      (value) => value + 'a',
+      (value) => value + 'b',
       () => 'c'
     );
     let compose2 = compose(
-      (val) => val + 1,
-      (val) => val + 2,
+      (value) => value + 1,
+      (value) => value + 2,
       () => 3
     );
 
