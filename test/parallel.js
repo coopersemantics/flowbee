@@ -1,7 +1,7 @@
 import parallel from '../lib/parallel.js';
 
 describe('parallel', () => {
-  it('should execute `fns` in parallel, keeping the order in which each is defined', (done) => {
+  it('should execute `fns` in parallel, keeping the original order', (done) => {
     let parallel1 = parallel(
       (fn) => {
         setTimeout(() => {

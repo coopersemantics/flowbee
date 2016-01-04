@@ -71,11 +71,11 @@ flowbee.series(function(next) {
 
 ### .parallel(fns)
 
-Executes `fns` in parallel, keeping the order in which each is defined. Each function has an `fn` function.
+Executes `fns` in parallel, keeping the original order. Each function has an `fn` function.
 
 #### fn(value)
 
-The `next` function has one argument - the fulfillment `value`. `value` can be of any type.
+The `fn` function has one argument - the fulfillment `value`. `value` can be of any type.
 
 #### .done(err, values)
 
@@ -134,7 +134,7 @@ flowbee.flow(function(next) {
 
 ### .compose(fns)
 
-Executes `fns` in a series. Each function has a `next` function, which consumes the return value of the `next` function that follows.
+Each function has a `next` function, which consumes the return value of the `next` function that follows.
 
 #### next(value)
 
