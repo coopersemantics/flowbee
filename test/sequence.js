@@ -1,21 +1,21 @@
 import sequence from '../lib/sequence.js';
 
 describe('sequence', () => {
-  it('should consume the return value of the previous `next` function', (done) => {
+  it('should consume the return value of the previous `fn` function', (done) => {
     let sequence1 = sequence(
-      (next) => {
+      (fn) => {
         setTimeout(() => {
-          next(() => 'a');
+          fn(() => 'a');
         }, 1000);
       },
-      (next) => {
+      (fn) => {
         setTimeout(() => {
-          next((value) => value + 'b');
+          fn((value) => value + 'b');
         }, 500);
       },
-      (next) => {
+      (fn) => {
         setTimeout(() => {
-          next((value) => value + 'c');
+          fn((value) => value + 'c');
         }, 1);
       }
     );

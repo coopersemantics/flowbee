@@ -1,21 +1,21 @@
 import compose from '../lib/compose.js';
 
 describe('compose', () => {
-  it('should consume the return value of the `next` function that follows', (done) => {
+  it('should consume the return value of the `fn` function that follows', (done) => {
     let compose1 = compose(
-      (next) => {
+      (fn) => {
         setTimeout(() => {
-          next((value) => value + 'a');
+          fn((value) => value + 'a');
         }, 1000);
       },
-      (next) => {
+      (fn) => {
         setTimeout(() => {
-          next((value) => value + 'b');
+          fn((value) => value + 'b');
         }, 500);
       },
-      (next) => {
+      (fn) => {
         setTimeout(() => {
-          next(() => 'c');
+          fn(() => 'c');
         }, 1);
       }
     );

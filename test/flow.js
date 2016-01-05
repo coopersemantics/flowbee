@@ -1,21 +1,21 @@
 import flow from '../lib/flow.js';
 
 describe('flow', () => {
-  it('should consume the value of the previous `next` function', (done) => {
+  it('should consume the value of the previous `fn` function', (done) => {
     let flow1 = flow(
-      (next) => {
+      (fn) => {
         setTimeout(() => {
-          next('a');
+          fn('a');
         }, 1000);
       },
-      (next, value) => {
+      (fn, value) => {
         setTimeout(() => {
-          next(value + 'b');
+          fn(value + 'b');
         }, 500);
       },
-      (next, value) => {
+      (fn, value) => {
         setTimeout(() => {
-          next(value + 'c');
+          fn(value + 'c');
         }, 1);
       }
     );

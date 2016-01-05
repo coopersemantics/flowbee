@@ -3,25 +3,25 @@ import step from '../lib/step.js';
 describe('step', () => {
   it('should create new instances', function() {
     let step1 = step(
-      (next) => {
-        next('a');
+      (fn) => {
+        fn('a');
       },
-      (next) => {
-        next('b');
+      (fn) => {
+        fn('b');
       },
-      (next) => {
-        next('c');
+      (fn) => {
+        fn('c');
       }
     );
     let step2 = step(
-      (next) => {
-        next('a');
+      (fn) => {
+        fn('a');
       },
-      (next) => {
-        next('b');
+      (fn) => {
+        fn('b');
       },
-      (next) => {
-        next('c');
+      (fn) => {
+        fn('c');
       }
     );
 
@@ -29,27 +29,27 @@ describe('step', () => {
     expect(step1.stack).to.have.length(3);
   });
 
-  it('should execute the `next` function, with a synchronous iterator', (done) => {
+  it('should execute the `fn` function, with a synchronous iterator', (done) => {
     let step1 = step(
-      (next) => {
-        next('a');
+      (fn) => {
+        fn('a');
       },
-      (next) => {
-        next('b');
+      (fn) => {
+        fn('b');
       },
-      (next) => {
-        next('c');
+      (fn) => {
+        fn('c');
       }
     );
     let step2 = step(
-      (next) => {
-        next('a');
+      (fn) => {
+        fn('a');
       },
-      (next) => {
-        next('b');
+      (fn) => {
+        fn('b');
       },
-      (next) => {
-        next('c');
+      (fn) => {
+        fn('c');
       }
     );
 
@@ -67,38 +67,38 @@ describe('step', () => {
     }, 1000);
   });
 
-  it('should execute the `next` function, with an asynchronous iterator', (done) => {
+  it('should execute the `fn` function, with an asynchronous iterator', (done) => {
     let step1 = step(
-      (next) => {
+      (fn) => {
         setTimeout(() => {
-          next('a');
+          fn('a');
         }, 1000);
       },
-      (next) => {
+      (fn) => {
         setTimeout(() => {
-          next('b');
+          fn('b');
         }, 500);
       },
-      (next) => {
+      (fn) => {
         setTimeout(() => {
-          next('c');
+          fn('c');
         }, 1);
       }
     );
     let step2 = step(
-      (next) => {
+      (fn) => {
         setTimeout(() => {
-          next('a');
+          fn('a');
         }, 100);
       },
-      (next) => {
+      (fn) => {
         setTimeout(() => {
-          next('b');
+          fn('b');
         }, 10);
       },
-      (next) => {
+      (fn) => {
         setTimeout(() => {
-          next('c');
+          fn('c');
         }, 1);
       }
     );
@@ -119,38 +119,38 @@ describe('step', () => {
 
   it('should stop subsequent execution, if a synchronous error is caught', (done) => {
     let step1 = step(
-      (next) => {
+      (fn) => {
         setTimeout(() => {
-          next('a');
+          fn('a');
         }, 1000);
       },
-      (next) => {
+      (fn) => {
         foo();
         setTimeout(() => {
-          next('b');
+          fn('b');
         }, 500);
       },
-      (next) => {
+      (fn) => {
         setTimeout(() => {
-          next('c');
+          fn('c');
         }, 1);
       }
     );
     let step2 = step(
-      (next) => {
+      (fn) => {
         foo();
         setTimeout(() => {
-          next('a');
+          fn('a');
         }, 100);
       },
-      (next) => {
+      (fn) => {
         setTimeout(() => {
-          next('b');
+          fn('b');
         }, 10);
       },
-      (next) => {
+      (fn) => {
         setTimeout(() => {
-          next('c');
+          fn('c');
         }, 1);
       }
     );
@@ -169,17 +169,17 @@ describe('step', () => {
     }, 1000);
   });
 
-  it('should stop subsequent execution, if `next` is not executed', function() {
+  it('should stop subsequent execution, if `fn` is not executed', function() {
     let values = [];
     let fn = sinon.spy();
     let step1 = step(
-      (next) => {
+      (fn) => {
         values.push('a');
       },
-      (next) => {
+      (fn) => {
         values.push('b');
       },
-      (next) => {
+      (fn) => {
         values.push('c');
       }
     );
