@@ -134,33 +134,33 @@ flowbee.flow(function(next) {
 
 ### .compose(fns)
 
-Executes `fns` in reverse order. Each function has a `next` function, which consumes the return value of the `next` function that follows.
+Executes `fns` in parallel. Each function has an `fn` function, which consumes the return value of the `fn` function that follows.
 
-#### next(value)
+#### fn(value)
 
-The `next` function has one argument - the fulfillment `value`. `value` must be a function.
+The `fn` function has one argument - the fulfillment `value`. `value` must be a function.
 
 #### .done(err, value)
 
 The `.done` method is executed, once all `fns` have been executed. `.done` has two arguments - `err` and `value`. If a synchronous error is caught, then `err` is the exception object; otherwise, `err` is `null.`
-It is important to note, if a synchronous error is caught, execution of `fns` is stopped, and `.done` is executed. `value` is the composition of `next` values, keeping the original order.
+It is important to note, if a synchronous error is caught, execution of `fns` is stopped, and `.done` is executed. `value` is the composition of `fn` values, keeping the original order.
 
 ```js
-flowbee.compose(function(next) {
+flowbee.compose(function(fn) {
   setTimeout(function() {
-    next(function(value) {
+    fn(function(value) {
       return value + 'a';
     });
   }, 1000);
-}, function(next) {
+}, function(fn) {
   setTimeout(function() {
-    next(function(value) {
+    fn(function(value) {
       return value + 'b';
     });
   }, 500);
-}, function(next) {
+}, function(fn) {
   setTimeout(function() {
-    next(function() {
+    fn(function() {
       return 'c';
     });
   }, 1);
@@ -172,32 +172,32 @@ flowbee.compose(function(next) {
 
 ### .sequence(fns)
 
-Executes `fns` in a series. Each function has a `next` function, which consumes the return value of the previous `next` function.
+Executes `fns` in parallel. Each function has an `fn` function, which consumes the return value of the previous `fn` function.
 
-#### next(value)
+#### fn(value)
 
-The `next` function has one argument - the fulfillment `value`. `value` must be a function.
+The `fn` function has one argument - the fulfillment `value`. `value` must be a function.
 
 #### .done(err, value)
 
-The `.done` method is executed, once all `fns` have been executed. `.done` has two arguments - `err` and `value`. If a synchronous error is caught, then `err` is the exception object; otherwise, `err` is `null.` It is important to note, if a synchronous error is caught, execution of `fns` is stopped, and `.done` is executed. `value` is the sequence of `next` values, keeping the original order.
+The `.done` method is executed, once all `fns` have been executed. `.done` has two arguments - `err` and `value`. If a synchronous error is caught, then `err` is the exception object; otherwise, `err` is `null.` It is important to note, if a synchronous error is caught, execution of `fns` is stopped, and `.done` is executed. `value` is the sequence of `fn` values, keeping the original order.
 
 ```js
-flowbee.sequence(function(next) {
+flowbee.sequence(function(fn) {
   setTimeout(function() {
-    next(function() {
+    fn(function() {
       return 'a';
     });
   }, 1000);
-}, function(next) {
+}, function(fn) {
   setTimeout(function() {
-    next(function(value) {
+    fn(function(value) {
       return value + 'b';
     });
   }, 500);
-}, function(next) {
+}, function(fn) {
   setTimeout(function() {
-    next(function(value) {
+    fn(function(value) {
       return value + 'c';
     });
   }, 1);
