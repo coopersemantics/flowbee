@@ -15,7 +15,7 @@ describe('during', () => {
       }
     );
 
-    during1.done((err, fn) => {
+    during1.execute((err, fn) => {
       expect(err).to.be.null;
       expect(fn(0)).to.equal(100);
       done();

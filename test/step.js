@@ -53,13 +53,13 @@ describe('step', () => {
       }
     );
 
-    step1.done((err, values) => {
+    step1.execute((err, values) => {
       expect(err).to.be.null;
       expect(values).to.deep.equal(['a', 'b', 'c']);
     });
 
     setTimeout(() => {
-      step2.done((err, values) => {
+      step2.execute((err, values) => {
         expect(err).to.be.null;
         expect(values).to.deep.equal(['a', 'b', 'c']);
         done();
@@ -103,13 +103,13 @@ describe('step', () => {
       }
     );
 
-    step1.done((err, values) => {
+    step1.execute((err, values) => {
       expect(err).to.be.null;
       expect(values).to.deep.equal(['a', 'b', 'c']);
     });
 
     setTimeout(() => {
-      step2.done((err, values) => {
+      step2.execute((err, values) => {
         expect(err).to.be.null;
         expect(values).to.deep.equal(['a', 'b', 'c']);
         done();
@@ -155,13 +155,13 @@ describe('step', () => {
       }
     );
 
-    step1.done((err, values) => {
+    step1.execute((err, values) => {
       expect(typeof err.message).to.equal('string');
       expect(values).to.be.undefined;
     });
 
     setTimeout(() => {
-      step2.done((err, values) => {
+      step2.execute((err, values) => {
         expect(typeof err.message).to.equal('string');
         expect(values).to.be.undefined;
         done();
@@ -184,7 +184,7 @@ describe('step', () => {
       }
     );
 
-    step1.done(fn);
+    step1.execute(fn);
     expect(fn.called).to.be.false;
     expect(values).to.deep.equal(['a']);
   });

@@ -20,7 +20,7 @@
 				setTimeout(function() {
 					fn('c');
 				}, 1);
-			}).done(function(err, values) {
+			}).execute(function(err, values) {
 				console.log(err, values); // null ["a", "b", "c"]
 			});
 		</script>

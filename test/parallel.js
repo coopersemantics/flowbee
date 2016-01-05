@@ -20,7 +20,7 @@ describe('parallel', () => {
       }
     );
 
-    parallel1.done((err, values) => {
+    parallel1.execute((err, values) => {
       expect(err).to.be.null;
       expect(values).to.deep.equal(['a', 'b', 'c']);
       done();

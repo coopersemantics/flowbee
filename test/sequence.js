@@ -20,7 +20,7 @@ describe('sequence', () => {
       }
     );
 
-    sequence1.done((err, value) => {
+    sequence1.execute((err, value) => {
       expect(err).to.be.null;
       expect(value).to.equal('abc');
       done();

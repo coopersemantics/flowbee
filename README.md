@@ -45,10 +45,14 @@ Executes `fns` in a series. Each function has an `fn` function. Once the previou
 
 The `fn` function has one argument - the fulfillment `value`. `value` can be of any type.
 
-#### .done(err, values)
+#### .execute(done)
 
-The `.done` method is executed, once all `fns` have been executed. `.done` has two arguments - `err` and `value`. If a synchronous error is caught, then `err` is the exception object; otherwise, `err` is `null.`
-It is important to note, if a synchronous error is caught, execution of `fns` is stopped, and `.done` is executed. `values` is an array of `fn` values, keeping the original order.
+Starts the execution of the method. Each function has a `done` function.
+
+##### done(err, values)
+
+The `done` function is executed, once all `fns` have been executed. `done` has two arguments - `err` and `value`. If a synchronous error is caught, then `err` is the exception object; otherwise, `err` is `null.`
+It is important to note, if a synchronous error is caught, execution of `fns` is stopped, and `done` is executed. `values` is an array of `fn` values, keeping the original order.
 
 ```js
 flowbee.series(function(fn) {
@@ -63,7 +67,7 @@ flowbee.series(function(fn) {
   setTimeout(function() {
     fn('c');
   }, 1);
-}).done(function(err, values) {
+}).execute(function(err, values) {
   // err => null
   // values => ["a", "b", "c"]
 });
@@ -77,9 +81,13 @@ Executes `fns` in parallel. Each function has an `fn` function.
 
 The `fn` function has one argument - the fulfillment `value`. `value` can be of any type.
 
-#### .done(err, values)
+#### .execute(done)
 
-The `.done` method is executed, once all `fn` functions have been executed. `.done` has two arguments - `err` and `value`. If a synchronous error is caught, then `err` is the exception object; otherwise, `err` is `null.` It is important to note, if a synchronous error is caught, execution of `fns` is stopped, and `.done` is executed. `values` is an array of `fn` values, keeping the original order.
+Starts the execution of the method. Each function has a `done` function.
+
+##### done(err, values)
+
+The `done` function is executed, once all `fn` functions have been executed. `done` has two arguments - `err` and `value`. If a synchronous error is caught, then `err` is the exception object; otherwise, `err` is `null.` It is important to note, if a synchronous error is caught, execution of `fns` is stopped, and `done` is executed. `values` is an array of `fn` values, keeping the original order.
 
 ```js
 flowbee.parallel(function(fn) {
@@ -94,7 +102,7 @@ flowbee.parallel(function(fn) {
   setTimeout(function() {
     fn('c');
   }, 1);
-}).done(function(err, values) {
+}).execute(function(err, values) {
   // err => null
   // values => ["a", "b", "c"]
 });
@@ -108,10 +116,14 @@ Executes `fns` in a series. Each function has an `fn` function. `fns` consume th
 
 The `fn` function has one argument - the fulfillment `value`. `value` can be of any type.
 
-#### .done(err, value)
+#### .execute(done)
 
-The `.done` method is executed, once all `fns` have been executed. `.done` has two arguments - `err` and `value`. If a synchronous error is caught, then `err` is the exception object; otherwise, `err` is `null.`
-It is important to note, if a synchronous error is caught, execution of `fns` is stopped, and `.done` is executed. `value` is the last `fn` value, which could be the sequence of `fn` values, keeping the original order.
+Starts the execution of the method. Each function has a `done` function.
+
+##### done(err, value)
+
+The `done` function is executed, once all `fns` have been executed. `done` has two arguments - `err` and `value`. If a synchronous error is caught, then `err` is the exception object; otherwise, `err` is `null.`
+It is important to note, if a synchronous error is caught, execution of `fns` is stopped, and `done` is executed. `value` is the last `fn` value, which could be the sequence of `fn` values, keeping the original order.
 
 ```js
 flowbee.flow(function(fn) {
@@ -126,7 +138,7 @@ flowbee.flow(function(fn) {
   setTimeout(function() {
     fn(value + 'c');
   }, 1);
-}).done(function(err, value) {
+}).execute(function(err, value) {
   // err => null
   // value => "abc"
 });
@@ -140,10 +152,14 @@ Executes `fns` in parallel. Each function has an `fn` function, which consumes t
 
 The `fn` function has one argument - the fulfillment `value`. `value` must be a function.
 
-#### .done(err, value)
+#### .execute(done)
 
-The `.done` method is executed, once all `fns` have been executed. `.done` has two arguments - `err` and `value`. If a synchronous error is caught, then `err` is the exception object; otherwise, `err` is `null.`
-It is important to note, if a synchronous error is caught, execution of `fns` is stopped, and `.done` is executed. `value` is the composition of `fn` values, keeping the original order.
+Starts the execution of the method. Each function has a `done` function.
+
+##### done(err, value)
+
+The `done` function is executed, once all `fns` have been executed. `done` has two arguments - `err` and `value`. If a synchronous error is caught, then `err` is the exception object; otherwise, `err` is `null.`
+It is important to note, if a synchronous error is caught, execution of `fns` is stopped, and `done` is executed. `value` is the composition of `fn` values, keeping the original order.
 
 ```js
 flowbee.compose(function(fn) {
@@ -164,7 +180,7 @@ flowbee.compose(function(fn) {
       return 'c';
     });
   }, 1);
-}).done(function(err, value) {
+}).execute(function(err, value) {
   // err => null
   // value => "cba"
 });
@@ -178,9 +194,13 @@ Executes `fns` in parallel. Each function has an `fn` function, which consumes t
 
 The `fn` function has one argument - the fulfillment `value`. `value` must be a function.
 
-#### .done(err, value)
+#### .execute(done)
 
-The `.done` method is executed, once all `fns` have been executed. `.done` has two arguments - `err` and `value`. If a synchronous error is caught, then `err` is the exception object; otherwise, `err` is `null.` It is important to note, if a synchronous error is caught, execution of `fns` is stopped, and `.done` is executed. `value` is the sequence of `fn` values, keeping the original order.
+Starts the execution of the method. Each function has a `done` function.
+
+##### done(err, value)
+
+The `done` function is executed, once all `fns` have been executed. `done` has two arguments - `err` and `value`. If a synchronous error is caught, then `err` is the exception object; otherwise, `err` is `null.` It is important to note, if a synchronous error is caught, execution of `fns` is stopped, and `done` is executed. `value` is the sequence of `fn` values, keeping the original order.
 
 ```js
 flowbee.sequence(function(fn) {
@@ -201,7 +221,7 @@ flowbee.sequence(function(fn) {
       return value + 'c';
     });
   }, 1);
-}).done(function(err, value) {
+}).execute(function(err, value) {
   // err => null
   // value => "abc"
 });
@@ -209,7 +229,7 @@ flowbee.sequence(function(fn) {
 
 ### .during(fns)
 
-Executes `fns` in parallel. Each function has one argument; the first function has `predicate`, and the last function has `fn`. Once `.done` is executed, and `predicate` is passed a `value`, `fn` will be executed, until `predicate` returns `false`.
+Executes `fns` in parallel. Each function has one argument; the first function has `predicate`, and the last function has `fn`. Once `done` is executed, and `predicate` is passed a `value`, `fn` will be executed, until `predicate` returns `false`.
 
 #### fn(value)
 
@@ -219,9 +239,13 @@ The `fn` function has one argument - the fulfillment `value`. `value` must be a 
 
 The `predicate` function has one argument - the fulfillment `value`. `value` must be a function.
 
-#### .done(err, fn)
+#### .execute(done)
 
-The `.done` method is executed, once all `fns` have been executed. `.done` has two arguments - `err` and `fn`. If a synchronous error is caught, then `err` is the exception object; otherwise, `err` is `null.` It is important to note, if a synchronous error is caught, execution of `fns` is stopped, and `.done` is executed. `fn` is the function that executes `predicate`, passing a `value`.
+Starts the execution of the method. Each function has a `done` function.
+
+##### done(err, fn)
+
+The `done` function is executed, once all `fns` have been executed. `done` has two arguments - `err` and `fn`. If a synchronous error is caught, then `err` is the exception object; otherwise, `err` is `null.` It is important to note, if a synchronous error is caught, execution of `fns` is stopped, and `done` is executed. `fn` is the function that executes `predicate`, passing a `value`.
 
 ```js
 flowbee.during(function(predicate) {
@@ -236,7 +260,7 @@ flowbee.during(function(predicate) {
       return value + 1;
     });
   }, 1);
-}).done(function(err, fn) {
+}).execute(function(err, fn) {
   if (err) {
     return err;
   }
@@ -248,7 +272,7 @@ flowbee.during(function(predicate) {
 
 ### .until(fns)
 
-Executes `fns` in parallel. Each function has one argument; the first function has `predicate`, and the last function has `fn`. Once `.done` is executed, and `predicate` is passed a `value`, `fn` will be executed, until `predicate` returns `true`.
+Executes `fns` in parallel. Each function has one argument; the first function has `predicate`, and the last function has `fn`. Once `done` is executed, and `predicate` is passed a `value`, `fn` will be executed, until `predicate` returns `true`.
 
 #### fn(value)
 
@@ -258,9 +282,13 @@ The `fn` function has one argument - the fulfillment `value`. `value` must be a 
 
 The `predicate` function has one argument - the fulfillment `value`. `value` must be a function.
 
-#### .done(err, fn)
+#### .execute(done)
 
-The `.done` method is executed, once all `fns` have been executed. `.done` has two arguments - `err` and `fn`. If a synchronous error is caught, then `err` is the exception object; otherwise, `err` is `null.` It is important to note, if a synchronous error is caught, execution of `fns` is stopped, and `.done` is executed. `fn` is the function that executes `predicate`, passing a `value`.
+Starts the execution of the method. Each function has a `done` function.
+
+##### done(err, fn)
+
+The `done` function is executed, once all `fns` have been executed. `done` has two arguments - `err` and `fn`. If a synchronous error is caught, then `err` is the exception object; otherwise, `err` is `null.` It is important to note, if a synchronous error is caught, execution of `fns` is stopped, and `done` is executed. `fn` is the function that executes `predicate`, passing a `value`.
 
 ```js
 flowbee.until(function(predicate) {
@@ -275,7 +303,7 @@ flowbee.until(function(predicate) {
       return value + 1;
     });
   }, 1);
-}).done(function(err, fn) {
+}).execute(function(err, fn) {
   if (err) {
     return err;
   }

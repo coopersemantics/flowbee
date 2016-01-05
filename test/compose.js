@@ -20,7 +20,7 @@ describe('compose', () => {
       }
     );
 
-    compose1.done((err, value) => {
+    compose1.execute((err, value) => {
       expect(err).to.be.null;
       expect(value).to.equal('cba');
       done();

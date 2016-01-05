@@ -15,7 +15,7 @@ describe('until', () => {
       }
     );
 
-    until1.done((err, fn) => {
+    until1.execute((err, fn) => {
       expect(err).to.be.null;
       expect(fn(0)).to.equal(101);
       done();
