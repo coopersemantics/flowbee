@@ -47,7 +47,7 @@ The `fn` function has one argument - the fulfillment `value`. `value` can be of 
 
 #### .execute(done)
 
-Starts the execution of the method. `.execute` has a `done` function.
+Starts the execution of `.series`. `.execute` has a `done` function.
 
 ##### done(err, values)
 
@@ -83,7 +83,7 @@ The `fn` function has one argument - the fulfillment `value`. `value` can be of 
 
 #### .execute(done)
 
-Starts the execution of the method. `.execute` has a `done` function.
+Starts the execution of `.parallel`. `.execute` has a `done` function.
 
 ##### done(err, values)
 
@@ -118,7 +118,7 @@ The `fn` function has one argument - the fulfillment `value`. `value` can be of 
 
 #### .execute(done)
 
-Starts the execution of the method. `.execute` has a `done` function.
+Starts the execution of `.flow`. `.execute` has a `done` function.
 
 ##### done(err, value)
 
@@ -158,7 +158,7 @@ The `fn` function has one argument - the fulfillment function - `f`.
 
 #### .execute(done)
 
-Starts the execution of the method. `.execute` has a `done` function.
+Starts the execution of `.compose`. `.execute` has a `done` function.
 
 ##### done(err, value)
 
@@ -204,7 +204,7 @@ The `fn` function has one argument - the fulfillment function - `f`.
 
 #### .execute(done)
 
-Starts the execution of the method. `.execute` has a `done` function.
+Starts the execution of `.sequence`. `.execute` has a `done` function.
 
 ##### done(err, value)
 
@@ -257,7 +257,7 @@ The `fn` function has one argument - the fulfillment function - `f`.
 
 #### .execute(done)
 
-Starts the execution of the method. `.execute` has a `done` function.
+Starts the execution of `.during`. `.execute` has a `done` function.
 
 ##### done(err, fn)
 
@@ -308,7 +308,7 @@ The `fn` function has one argument - the fulfillment function - `f`.
 
 #### .execute(done)
 
-Starts the execution of the method. `.execute` has a `done` function.
+Starts the execution of `.until`. `.execute` has a `done` function.
 
 ##### done(err, fn)
 
