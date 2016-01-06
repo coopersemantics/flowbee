@@ -47,7 +47,7 @@ The `fn` function has one argument - the fulfillment `value`. `value` can be of 
 
 #### .execute(done)
 
-Starts the execution of the method. Each function has a `done` function.
+Starts the execution of the method. `.execute` has a `done` function.
 
 ##### done(err, values)
 
@@ -83,7 +83,7 @@ The `fn` function has one argument - the fulfillment `value`. `value` can be of 
 
 #### .execute(done)
 
-Starts the execution of the method. Each function has a `done` function.
+Starts the execution of the method. `.execute` has a `done` function.
 
 ##### done(err, values)
 
@@ -118,7 +118,7 @@ The `fn` function has one argument - the fulfillment `value`. `value` can be of 
 
 #### .execute(done)
 
-Starts the execution of the method. Each function has a `done` function.
+Starts the execution of the method. `.execute` has a `done` function.
 
 ##### done(err, value)
 
@@ -148,13 +148,17 @@ flowbee.flow(function(fn) {
 
 Executes `fns` in parallel. Each function has an `fn` function, which consumes the return value of the `fn` function that follows.
 
-#### fn(value)
+#### fn(f)
 
-The `fn` function has one argument - the fulfillment `value`. `value` must be a function.
+The `fn` function has one argument - the fulfillment function - `f`.
+
+##### f(value)
+
+`value` is the return value of the `fn` that follows.
 
 #### .execute(done)
 
-Starts the execution of the method. Each function has a `done` function.
+Starts the execution of the method. `.execute` has a `done` function.
 
 ##### done(err, value)
 
@@ -190,13 +194,17 @@ flowbee.compose(function(fn) {
 
 Executes `fns` in parallel. Each function has an `fn` function, which consumes the return value of the previous `fn` function.
 
-#### fn(value)
+#### fn(f)
 
-The `fn` function has one argument - the fulfillment `value`. `value` must be a function.
+The `fn` function has one argument - the fulfillment function - `f`.
+
+##### f(value)
+
+`value` is the return value of the previous `fn` function.
 
 #### .execute(done)
 
-Starts the execution of the method. Each function has a `done` function.
+Starts the execution of the method. `.execute` has a `done` function.
 
 ##### done(err, value)
 
@@ -231,17 +239,25 @@ flowbee.sequence(function(fn) {
 
 Executes `fns` in parallel. Each function has one argument; the first function has `predicate`, and the last function has `fn`. Once `done` is executed, and `predicate` is passed a `value`, `fn` will be executed, until `predicate` returns `false`.
 
-#### fn(value)
+#### predicate(f)
 
-The `fn` function has one argument - the fulfillment `value`. `value` must be a function.
+The `predicate` function has one argument - the fulfillment function - `f`.
 
-#### predicate(value)
+##### f(value)
 
-The `predicate` function has one argument - the fulfillment `value`. `value` must be a function.
+`value` is the return value of `fn`; `done`'s `fn` starts the execution, passing the initial value.
+
+#### fn(f)
+
+The `fn` function has one argument - the fulfillment function - `f`.
+
+##### f(value)
+
+`value` is the return value of the previous `fn` function.
 
 #### .execute(done)
 
-Starts the execution of the method. Each function has a `done` function.
+Starts the execution of the method. `.execute` has a `done` function.
 
 ##### done(err, fn)
 
@@ -274,17 +290,25 @@ flowbee.during(function(predicate) {
 
 Executes `fns` in parallel. Each function has one argument; the first function has `predicate`, and the last function has `fn`. Once `done` is executed, and `predicate` is passed a `value`, `fn` will be executed, until `predicate` returns `true`.
 
-#### fn(value)
+#### predicate(f)
 
-The `fn` function has one argument - the fulfillment `value`. `value` must be a function.
+The `predicate` function has one argument - the fulfillment function - `f`.
 
-#### predicate(value)
+##### f(value)
 
-The `predicate` function has one argument - the fulfillment `value`. `value` must be a function.
+`value` is the return value of `fn`; `done`'s `fn` starts the execution, passing the initial value.
+
+#### fn(f)
+
+The `fn` function has one argument - the fulfillment function - `f`.
+
+##### f(value)
+
+`value` is the return value of the previous `fn` function.
 
 #### .execute(done)
 
-Starts the execution of the method. Each function has a `done` function.
+Starts the execution of the method. `.execute` has a `done` function.
 
 ##### done(err, fn)
 
