@@ -157,13 +157,13 @@ describe('step', () => {
 
     step1.execute((err, values) => {
       expect(typeof err.message).to.equal('string');
-      expect(values).to.be.undefined;
+      expect(values).to.deep.equal(['a']);
     });
 
     setTimeout(() => {
       step2.execute((err, values) => {
         expect(typeof err.message).to.equal('string');
-        expect(values).to.be.undefined;
+        expect(values).to.be.empty;
         done();
       });
     }, 1000);
@@ -171,7 +171,7 @@ describe('step', () => {
 
   it('should stop subsequent execution, if `fn` is not executed', function() {
     let values = [];
-    let fn = sinon.spy();
+    let done = sinon.spy();
     let step1 = step(
       (fn) => {
         values.push('a');
@@ -184,8 +184,26 @@ describe('step', () => {
       }
     );
 
-    step1.execute(fn);
-    expect(fn.called).to.be.false;
+    step1.execute(done);
+    expect(done.called).to.be.false;
     expect(values).to.deep.equal(['a']);
+  });
+
+  it('should log a warning message, if `.execute` does not have a callback', function() {
+    let consoleWarnSpy = sinon.spy(console, 'warn');
+    let step1 = step(
+      (fn) => {
+        fn('a');
+      },
+      (fn) => {
+        fn('b');
+      },
+      (fn) => {
+        fn('c');
+      }
+    );
+
+    step1.execute();
+    expect(consoleWarnSpy.args[0]).to.have.length(3);
   });
 });
