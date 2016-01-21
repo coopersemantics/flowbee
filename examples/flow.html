@@ -8,17 +8,17 @@
 	<body>
 		<script src="../dist/flowbee.js"></script>
 		<script>
-			flowbee.flow(function(fn) {
+			flowbee.flow(function(resolve) {
 				setTimeout(function() {
-					fn('a');
+					resolve('a');
 				}, 1000);
-			}, function(fn, value) {
+			}, function(resolve, value) {
 				setTimeout(function() {
-					fn(value + 'b');
+					resolve(value + 'b');
 				}, 500);
-			}, function(fn, value) {
+			}, function(resolve, value) {
 				setTimeout(function() {
-					fn(value + 'c');
+					resolve(value + 'c');
 				}, 1);
 			}).execute(function(err, value) {
 				console.log(err, value); // null "abc"

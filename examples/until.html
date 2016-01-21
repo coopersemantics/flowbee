@@ -8,15 +8,15 @@
 	<body>
 		<script src="../dist/flowbee.js"></script>
 		<script>
-			flowbee.until(function(predicate) {
+			flowbee.until(function(test) {
 				setTimeout(function() {
-					predicate(function(value) {
+					test(function(value) {
 						return value > 100;
 					});
 				}, 1000);
-			}, function(fn) {
+			}, function(resume) {
 				setTimeout(function() {
-					fn(function(value) {
+					resume(function(value) {
 						return value + 1;
 					});
 				}, 1);

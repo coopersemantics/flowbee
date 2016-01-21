@@ -8,21 +8,21 @@
 	<body>
 		<script src="../dist/flowbee.js"></script>
 		<script>
-			flowbee.sequence(function(fn) {
+			flowbee.sequence(function(resolve) {
 				setTimeout(function() {
-					fn(function() {
+					resolve(function() {
 						return 'a';
 					});
 				}, 1000);
-			}, function(fn) {
+			}, function(resolve) {
 				setTimeout(function() {
-					fn(function(value) {
+					resolve(function(value) {
 						return value + 'b';
 					});
 				}, 500);
-			}, function(fn) {
+			}, function(resolve) {
 				setTimeout(function() {
-					fn(function(value) {
+					resolve(function(value) {
 						return value + 'c';
 					});
 				}, 1);
