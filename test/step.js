@@ -3,25 +3,25 @@ import step from '../lib/step.js';
 describe('step', () => {
   it('should create new instances', function() {
     let step1 = step(
-      (fn) => {
-        fn('a');
+      (resolve) => {
+        resolve('a');
       },
-      (fn) => {
-        fn('b');
+      (resolve) => {
+        resolve('b');
       },
-      (fn) => {
-        fn('c');
+      (resolve) => {
+        resolve('c');
       }
     );
     let step2 = step(
-      (fn) => {
-        fn('a');
+      (resolve) => {
+        resolve('a');
       },
-      (fn) => {
-        fn('b');
+      (resolve) => {
+        resolve('b');
       },
-      (fn) => {
-        fn('c');
+      (resolve) => {
+        resolve('c');
       }
     );
 
@@ -29,27 +29,27 @@ describe('step', () => {
     expect(step1.stack).to.have.length(3);
   });
 
-  it('should execute the `fn` function, with a synchronous iterator', (done) => {
+  it('should execute the `resolve` function, with a synchronous iterator', (done) => {
     let step1 = step(
-      (fn) => {
-        fn('a');
+      (resolve) => {
+        resolve('a');
       },
-      (fn) => {
-        fn('b');
+      (resolve) => {
+        resolve('b');
       },
-      (fn) => {
-        fn('c');
+      (resolve) => {
+        resolve('c');
       }
     );
     let step2 = step(
-      (fn) => {
-        fn('a');
+      (resolve) => {
+        resolve('a');
       },
-      (fn) => {
-        fn('b');
+      (resolve) => {
+        resolve('b');
       },
-      (fn) => {
-        fn('c');
+      (resolve) => {
+        resolve('c');
       }
     );
 
@@ -67,38 +67,38 @@ describe('step', () => {
     }, 1000);
   });
 
-  it('should execute the `fn` function, with an asynchronous iterator', (done) => {
+  it('should execute the `resolve` function, with an asynchronous iterator', (done) => {
     let step1 = step(
-      (fn) => {
+      (resolve) => {
         setTimeout(() => {
-          fn('a');
+          resolve('a');
         }, 1000);
       },
-      (fn) => {
+      (resolve) => {
         setTimeout(() => {
-          fn('b');
+          resolve('b');
         }, 500);
       },
-      (fn) => {
+      (resolve) => {
         setTimeout(() => {
-          fn('c');
+          resolve('c');
         }, 1);
       }
     );
     let step2 = step(
-      (fn) => {
+      (resolve) => {
         setTimeout(() => {
-          fn('a');
+          resolve('a');
         }, 100);
       },
-      (fn) => {
+      (resolve) => {
         setTimeout(() => {
-          fn('b');
+          resolve('b');
         }, 10);
       },
-      (fn) => {
+      (resolve) => {
         setTimeout(() => {
-          fn('c');
+          resolve('c');
         }, 1);
       }
     );
@@ -119,38 +119,38 @@ describe('step', () => {
 
   it('should stop subsequent execution, if a synchronous error is caught', (done) => {
     let step1 = step(
-      (fn) => {
+      (resolve) => {
         setTimeout(() => {
-          fn('a');
+          resolve('a');
         }, 1000);
       },
-      (fn) => {
+      (resolve) => {
         foo();
         setTimeout(() => {
-          fn('b');
+          resolve('b');
         }, 500);
       },
-      (fn) => {
+      (resolve) => {
         setTimeout(() => {
-          fn('c');
+          resolve('c');
         }, 1);
       }
     );
     let step2 = step(
-      (fn) => {
+      (resolve) => {
         foo();
         setTimeout(() => {
-          fn('a');
+          resolve('a');
         }, 100);
       },
-      (fn) => {
+      (resolve) => {
         setTimeout(() => {
-          fn('b');
+          resolve('b');
         }, 10);
       },
-      (fn) => {
+      (resolve) => {
         setTimeout(() => {
-          fn('c');
+          resolve('c');
         }, 1);
       }
     );
@@ -169,17 +169,17 @@ describe('step', () => {
     }, 1000);
   });
 
-  it('should stop subsequent execution, if `fn` is not executed', function() {
+  it('should stop subsequent execution, if `resolve` is not executed', function() {
     let values = [];
     let done = sinon.spy();
     let step1 = step(
-      (fn) => {
+      (resolve) => {
         values.push('a');
       },
-      (fn) => {
+      (resolve) => {
         values.push('b');
       },
-      (fn) => {
+      (resolve) => {
         values.push('c');
       }
     );
@@ -192,14 +192,14 @@ describe('step', () => {
   it('should log a warning message, if `.execute` does not have a callback', function() {
     let consoleWarnSpy = sinon.spy(console, 'warn');
     let step1 = step(
-      (fn) => {
-        fn('a');
+      (resolve) => {
+        resolve('a');
       },
-      (fn) => {
-        fn('b');
+      (resolve) => {
+        resolve('b');
       },
-      (fn) => {
-        fn('c');
+      (resolve) => {
+        resolve('c');
       }
     );
 

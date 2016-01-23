@@ -1,16 +1,19 @@
 import during from '../lib/during.js';
 
+/**
+ * @see {@link ./step} for step-specific tests.
+ */
 describe('during', () => {
-  it('should execute `fn` until `predicate` returns `false`', (done) => {
+  it('should execute `resume` until `test` returns `false`', (done) => {
     let during1 = during(
-      (predicate) => {
+      (test) => {
         setTimeout(() => {
-          predicate((value) => value < 100);
+          test((value) => value < 100);
         }, 1000);
       },
-      (fn) => {
+      (resume) => {
         setTimeout(() => {
-          fn((value) => value + 1);
+          resume((value) => value + 1);
         }, 1);
       }
     );

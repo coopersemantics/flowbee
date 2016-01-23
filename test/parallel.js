@@ -1,21 +1,24 @@
 import parallel from '../lib/parallel.js';
 
+/**
+ * @see {@link ./step} for step-specific tests.
+ */
 describe('parallel', () => {
-  it('should execute `fns` in parallel, keeping the original order', (done) => {
+  it('should execute `tasks` in parallel, keeping the original order', (done) => {
     let parallel1 = parallel(
-      (fn) => {
+      (resolve) => {
         setTimeout(() => {
-          fn('a');
+          resolve('a');
         }, 1000);
       },
-      (fn) => {
+      (resolve) => {
         setTimeout(() => {
-          fn('b');
+          resolve('b');
         }, 500);
       },
-      (fn) => {
+      (resolve) => {
         setTimeout(() => {
-          fn('c');
+          resolve('c');
         }, 1);
       }
     );

@@ -1,16 +1,19 @@
 import until from '../lib/until.js';
 
+/**
+ * @see {@link ./step} for step-specific tests.
+ */
 describe('until', () => {
-  it('should execute `fn` until `predicate` returns `true`', (done) => {
+  it('should execute `resume` until `test` returns `true`', (done) => {
     let until1 = until(
-      (predicate) => {
+      (test) => {
         setTimeout(() => {
-          predicate((value) => value > 100);
+          test((value) => value > 100);
         }, 1000);
       },
-      (fn) => {
+      (resume) => {
         setTimeout(() => {
-          fn((value) => value + 1);
+          resume((value) => value + 1);
         }, 1);
       }
     );

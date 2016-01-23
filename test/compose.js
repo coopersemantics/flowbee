@@ -1,21 +1,24 @@
 import compose from '../lib/compose.js';
 
+/**
+ * @see {@link ./step} for step-specific tests.
+ */
 describe('compose', () => {
-  it('should consume the return value of the `fn` function that follows', (done) => {
+  it('should consume the return value of the `resolve` function that follows', (done) => {
     let compose1 = compose(
-      (fn) => {
+      (resolve) => {
         setTimeout(() => {
-          fn((value) => value + 'a');
+          resolve((value) => value + 'a');
         }, 1000);
       },
-      (fn) => {
+      (resolve) => {
         setTimeout(() => {
-          fn((value) => value + 'b');
+          resolve((value) => value + 'b');
         }, 500);
       },
-      (fn) => {
+      (resolve) => {
         setTimeout(() => {
-          fn(() => 'c');
+          resolve(() => 'c');
         }, 1);
       }
     );

@@ -1,21 +1,24 @@
 import flow from '../lib/flow.js';
 
+/**
+ * @see {@link ./step} for step-specific tests.
+ */
 describe('flow', () => {
-  it('should consume the value of the previous `fn` function', (done) => {
+  it('should consume the value of the previous `resolve` function', (done) => {
     let flow1 = flow(
-      (fn) => {
+      (resolve) => {
         setTimeout(() => {
-          fn('a');
+          resolve('a');
         }, 1000);
       },
-      (fn, value) => {
+      (resolve, value) => {
         setTimeout(() => {
-          fn(value + 'b');
+          resolve(value + 'b');
         }, 500);
       },
-      (fn, value) => {
+      (resolve, value) => {
         setTimeout(() => {
-          fn(value + 'c');
+          resolve(value + 'c');
         }, 1);
       }
     );

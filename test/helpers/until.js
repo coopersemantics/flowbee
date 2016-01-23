@@ -1,7 +1,7 @@
 import until from '../../lib/helpers/until.js';
 
 describe('until', () => {
-  it('should execute `fn` until `predicate` returns `true`', () => {
+  it('should execute `fn` until `test` returns `true`', () => {
     let until1 = until(
       (val) => val > 100,
       (val) => val + 1

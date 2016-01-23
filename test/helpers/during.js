@@ -1,7 +1,7 @@
 import during from '../../lib/helpers/during.js';
 
 describe('during', () => {
-  it('should execute `fn` until `predicate` returns `false`', () => {
+  it('should execute `fn` until `test` returns `false`', () => {
     let during1 = during(
       (val) => val < 100,
       (val) => val + 1

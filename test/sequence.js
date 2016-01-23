@@ -1,21 +1,24 @@
 import sequence from '../lib/sequence.js';
 
+/**
+ * @see {@link ./step} for step-specific tests.
+ */
 describe('sequence', () => {
-  it('should consume the return value of the previous `fn` function', (done) => {
+  it('should consume the return value of the previous `resolve` function', (done) => {
     let sequence1 = sequence(
-      (fn) => {
+      (resolve) => {
         setTimeout(() => {
-          fn(() => 'a');
+          resolve(() => 'a');
         }, 1000);
       },
-      (fn) => {
+      (resolve) => {
         setTimeout(() => {
-          fn((value) => value + 'b');
+          resolve((value) => value + 'b');
         }, 500);
       },
-      (fn) => {
+      (resolve) => {
         setTimeout(() => {
-          fn((value) => value + 'c');
+          resolve((value) => value + 'c');
         }, 1);
       }
     );
